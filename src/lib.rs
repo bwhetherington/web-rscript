@@ -26,7 +26,7 @@ extern "C" {
 static mut ENGINE: Option<Engine> = None;
 
 fn evaluate(input: &str, engine: &mut Engine) -> Result<String, String> {
-    let lexer = Lexer::new(input);
+    let lexer = Lexer::new(Some("<input>"), input);
     let mut parser = Parser::new(lexer);
     let expr = parser.parse_expr().map_err(|err| err.to_string())?;
     let value = engine.evaluate(&expr).map_err(|err| err.to_string())?;
